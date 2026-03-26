@@ -20,43 +20,43 @@ export default function DashboardPage() {
   }, []);
 
   return (
-    <>
-      <section className="panel overflow-hidden px-6 py-8 md:px-8">
+    <div className="space-y-6">
+      <section className="bg-white shadow-sm rounded-lg p-6 md:p-8 border border-slate-200">
         <div className="grid gap-8 xl:grid-cols-[1.25fr_0.75fr]">
-          <div>
-            <p className="eyebrow">India-first strategic intelligence engine</p>
-            <h1 className="mt-4 max-w-4xl font-display text-4xl leading-tight text-white md:text-6xl">
-              A causal ontology for geopolitics, markets, climate, defense, and society.
+          <div className="flex flex-col justify-center">
+            <p className="text-sm font-bold tracking-wider text-[#0056B3] uppercase">India-first Strategic Intelligence</p>
+            <h1 className="mt-4 max-w-4xl text-3xl font-bold leading-tight text-[#212529] md:text-5xl">
+              Causal Ontology for Geopolitics, Markets, Climate, Defense, and Society.
             </h1>
-            <p className="mt-5 max-w-3xl text-base leading-8 text-slate-300">
+            <p className="mt-5 max-w-3xl text-base leading-8 text-slate-600">
               ARGOS fuses structured indicators and live open-source signals into a confidence-aware graph so analysts can move from question to grounded assessment in seconds.
             </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/query" className="rounded-[22px] bg-gradient-to-r from-cyan-400 to-emerald-400 px-5 py-3 font-display text-sm uppercase tracking-[0.22em] text-slate-950">
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Link href="/query" className="rounded-md bg-[#0056B3] hover:bg-[#004494] px-6 py-3 font-semibold text-white transition-colors shadow-sm">
                 Launch Query Workbench
               </Link>
-              <Link href="/graph" className="rounded-[22px] border border-white/10 px-5 py-3 text-sm text-slate-200 transition hover:border-cyan-400/35 hover:bg-white/5">
+              <Link href="/graph" className="rounded-md bg-white border border-[#0056B3] text-[#0056B3] hover:bg-slate-50 px-6 py-3 font-semibold transition-colors shadow-sm">
                 Open Graph Explorer
               </Link>
             </div>
           </div>
-          <div className="grid gap-3 rounded-[30px] border border-white/10 bg-white/5 p-5">
-            <div className="flex items-center justify-between">
-              <p className="panel-title">Mission Profile</p>
-              <div className="data-pill">Graph-RAG active</div>
+          <div className="grid gap-4 rounded-lg border border-slate-200 bg-slate-50 p-6 flex flex-col">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-3 mb-2">
+              <h2 className="text-lg font-bold text-[#212529]">Mission Profile</h2>
+              <span className="px-3 py-1 bg-[#28A745]/10 text-[#28A745] text-xs font-bold rounded uppercase tracking-wide border border-[#28A745]/30">Active</span>
             </div>
-            <div className="rounded-[24px] border border-white/10 bg-black/20 p-4">
-              <p className="font-display text-xl text-white">Top India exposures right now</p>
-              <div className="mt-4 space-y-3">
+            <div className="flex-1">
+              <h3 className="font-semibold text-[#003366] mb-4">Top India Exposures</h3>
+              <div className="space-y-4">
                 {overview?.top_vulnerabilities.map((citation) => (
-                  <div key={citation.edge_id} className="rounded-2xl border border-white/10 bg-white/5 p-3">
+                  <div key={citation.edge_id} className="rounded-md border border-slate-200 bg-white p-4 shadow-sm hover:shadow-md transition-shadow">
                     <div className="flex flex-wrap items-center gap-3">
                       <ConfidenceBadge value={citation.strength} />
                       <ProvenanceTag url={citation.source_url} />
                     </div>
-                    <p className="mt-3 text-sm leading-6 text-slate-200">{citation.label}</p>
+                    <p className="mt-3 text-sm leading-relaxed text-slate-700 font-medium">{citation.label}</p>
                   </div>
-                )) ?? <p className="text-sm text-slate-400">Loading vulnerabilities...</p>}
+                )) ?? <p className="text-sm text-slate-500 italic">Synchronizing vulnerability feeds...</p>}
               </div>
             </div>
           </div>
@@ -75,9 +75,11 @@ export default function DashboardPage() {
             <DomainMatrix cells={overview.domain_matrix} />
             <IndiaMap states={overview.india_risk_overlay} />
           </section>
-          <AlertFeed alerts={overview.alerts} />
+          <div className="bg-white shadow-sm rounded-lg border border-slate-200 overflow-hidden">
+             <AlertFeed alerts={overview.alerts} />
+          </div>
         </>
       ) : null}
-    </>
+    </div>
   );
 }
