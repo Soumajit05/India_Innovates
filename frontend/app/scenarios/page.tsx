@@ -27,13 +27,14 @@ export default function ScenariosPage() {
   };
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[0.38fr_0.62fr]">
-      <div className="panel p-5">
-        <div>
-          <p className="panel-title">Scenario Templates</p>
-          <h2 className="mt-2 font-display text-2xl text-white">Shock Propagation Simulator</h2>
+    <div className="grid gap-6 xl:grid-cols-[0.35fr_0.65fr]">
+      {/* Left Column: Simulator Controls */}
+      <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6 self-start sticky top-6">
+        <div className="border-b border-slate-100 pb-4">
+          <p className="text-xs font-bold tracking-wider text-[#0056B3] uppercase">Scenario Templates</p>
+          <h2 className="mt-1 text-xl font-bold text-[#212529]">Shock Simulator</h2>
         </div>
-        <div className="mt-6 grid gap-3">
+        <div className="mt-6 flex flex-col gap-3">
           {templates.map((template) => {
             const active = selectedTemplate?.label === template.label;
             return (
@@ -41,17 +42,26 @@ export default function ScenariosPage() {
                 key={template.label}
                 type="button"
                 onClick={() => setSelectedTemplate(template)}
-                className={`rounded-[24px] border p-4 text-left transition ${
+                className={`rounded-md border p-4 text-left transition-colors relative ${
                   active
-                    ? "border-cyan-400/40 bg-cyan-400/10"
-                    : "border-white/10 bg-white/5 hover:border-white/20"
+                    ? "border-[#0056B3] bg-[#0056B3]/5 shadow-sm"
+                    : "border-slate-200 bg-white hover:border-slate-300 hover:bg-slate-50"
                 }`}
               >
-                <p className="font-display text-lg text-white">{template.label}</p>
-                <p className="mt-2 font-mono text-xs uppercase tracking-[0.18em] text-slate-400">
-                  {template.trigger_node} | {template.change_percent > 0 ? "+" : ""}
-                  {template.change_percent}%
-                </p>
+                {active && <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#0056B3] rounded-l-md"></div>}
+                <p className={`font-bold ${active ? 'text-[#0056B3]' : 'text-[#212529]'}`}>{template.label}</p>
+                <div className="mt-2 flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded border border-slate-200">
+                    {template.trigger_node}
+                  </span>
+                  <span className={`text-xs font-bold px-2 py-1 rounded border ${
+                    template.change_percent > 0 
+                      ? 'bg-green-100 text-green-800 border-green-300' 
+                      : 'bg-red-100 text-red-800 border-red-300'
+                  }`}>
+                    {template.change_percent > 0 ? "+" : ""}{template.change_percent}%
+                  </span>
+                </div>
               </button>
             );
           })}
@@ -59,52 +69,84 @@ export default function ScenariosPage() {
         <button
           type="button"
           onClick={() => void runSimulation()}
-          className="mt-5 w-full rounded-[22px] bg-gradient-to-r from-cyan-400 to-emerald-400 px-5 py-4 font-display text-sm uppercase tracking-[0.24em] text-slate-950"
+          className="mt-6 w-full rounded-md bg-[#0056B3] hover:bg-[#004494] px-6 py-3 font-semibold text-white shadow-sm transition-colors uppercase tracking-widest text-sm"
         >
-          Simulate
+          Execute Simulation
         </button>
       </div>
 
+      {/* Right Column: Results */}
       <div className="space-y-6">
-        <div className="panel p-5">
-          <div className="flex items-center justify-between">
+        <div className="bg-white rounded-lg shadow-sm border border-slate-200 overflow-hidden">
+          <div className="bg-[#152A38] text-white px-6 py-4 flex items-center justify-between">
             <div>
-              <p className="panel-title">Impact Table</p>
-              <h2 className="mt-2 font-display text-2xl text-white">Downstream Effects</h2>
+              <p className="text-xs font-bold tracking-wide text-slate-300 uppercase">Impact Table</p>
+              <h2 className="mt-1 text-lg font-bold">Downstream Effects</h2>
             </div>
-            <div className="data-pill">{result?.trigger_node ?? "Awaiting simulation"}</div>
+            <div className="bg-[#0056B3] text-xs font-bold px-3 py-1 rounded text-white border border-[#004494]">
+               Trigger: {result?.trigger_node ?? "Pending"}
+            </div>
           </div>
-          <p className="mt-4 text-sm leading-6 text-slate-300">{result?.narrative_summary ?? "Run a scenario to propagate an upstream shock through the ontology."}</p>
-          <div className="mt-6 grid gap-4">
-            {result?.impacts.map((impact) => (
-              <div key={`${impact.node.id}-${impact.path.join("-")}`} className="rounded-[24px] border border-white/10 bg-white/5 p-4">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="font-display text-xl text-white">{impact.node.name}</p>
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-cyan-200">{impact.confidence * 100}% confidence</p>
-                </div>
-                <div className="mt-3 grid gap-3 text-sm text-slate-300 md:grid-cols-3">
-                  <p>Direction: {impact.direction}</p>
-                  <p>Magnitude: {impact.magnitude}/10</p>
-                  <p>Time horizon: {impact.time_horizon}</p>
-                </div>
-                <p className="mt-3 text-sm leading-6 text-slate-400">{impact.assumption}</p>
+          
+          <div className="p-6">
+            <p className="text-sm leading-relaxed text-slate-700 bg-[#F4F6F9] p-4 rounded-md border border-slate-200 font-medium">
+              {result?.narrative_summary ?? "Select a scenario template and run the simulation to propagate an upstream shock through the standard causal ontology."}
+            </p>
+            
+            {result && result.impacts.length > 0 && (
+              <div className="mt-6 space-y-4">
+                <h3 className="text-sm font-bold text-[#212529] border-b border-slate-200 pb-2">Identified Vulnerabilities</h3>
+                {result.impacts.map((impact) => (
+                  <div key={`${impact.node.id}-${impact.path.join("-")}`} className="rounded-md border border-slate-200 bg-white p-5 shadow-sm hover:shadow-md transition-shadow">
+                    <div className="flex items-center justify-between mb-3 border-b border-slate-100 pb-3">
+                      <p className="text-lg font-bold text-[#003366]">{impact.node.name}</p>
+                      <span className="text-xs font-bold bg-[#FFC107]/20 text-yellow-800 border border-[#FFC107]/50 px-2 py-1 rounded">
+                        {(impact.confidence * 100).toFixed(0)}% Confidence
+                      </span>
+                    </div>
+                    
+                    <div className="grid grid-cols-3 gap-2 text-xs font-bold text-slate-600 mb-4 bg-slate-50 p-3 rounded border border-slate-100">
+                      <div className="flex flex-col">
+                        <span className="text-slate-400 uppercase tracking-wider mb-1">Direction</span>
+                        <span className="text-slate-800">{impact.direction}</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-slate-400 uppercase tracking-wider mb-1">Severity</span>
+                        <span className="text-slate-800">{impact.magnitude}/10</span>
+                      </div>
+                      <div className="flex flex-col">
+                        <span className="text-slate-400 uppercase tracking-wider mb-1">Time Horizon</span>
+                        <span className="text-slate-800">{impact.time_horizon}</span>
+                      </div>
+                    </div>
+                    
+                    <p className="text-sm text-slate-700 leading-relaxed border-l-2 border-[#0056B3] pl-3 italic">
+                      {impact.assumption}
+                    </p>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         </div>
-        <div className="panel p-5">
-          <p className="panel-title">Path Narrative</p>
-          <h2 className="mt-2 font-display text-2xl text-white">Hop-by-Hop Propagation</h2>
-          <div className="mt-6">
-            <Timeline
-              items={(result?.impacts ?? []).map((impact) => ({
-                title: impact.node.name,
-                detail: impact.path.join(" -> "),
-                meta: impact.time_horizon,
-              }))}
-            />
+
+        {result && (
+          <div className="bg-white rounded-lg shadow-sm border border-slate-200 p-6">
+            <div className="border-b border-slate-100 pb-4 mb-6">
+              <p className="text-xs font-bold tracking-wider text-[#0056B3] uppercase">Path Narrative</p>
+              <h2 className="mt-1 text-xl font-bold text-[#212529]">Hop-by-Hop Propagation</h2>
+            </div>
+            <div className="pl-4 border-l-2 border-slate-200 ml-2">
+              <Timeline
+                items={result.impacts.map((impact) => ({
+                  title: impact.node.name,
+                  detail: impact.path.join(" ➔ "),
+                  meta: `Horizon: ${impact.time_horizon}`,
+                }))}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

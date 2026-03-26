@@ -11,6 +11,8 @@ import type { Domain, GraphEdge, GraphNode, GraphPayload } from "../../lib/types
 
 const allDomains: Domain[] = ["Geopolitics", "Economics", "Defense", "Technology", "Climate", "Society"];
 
+import { GeoNetworkMap } from "../../components/graph/GeoNetworkMap";
+
 export default function GraphPage() {
   const [graph, setGraph] = useState<GraphPayload>({ nodes: [], edges: [] });
   const [search, setSearch] = useState("");
@@ -39,30 +41,53 @@ export default function GraphPage() {
   };
 
   return (
-    <div className="grid gap-6 xl:grid-cols-[0.28fr_0.72fr_0.3fr]">
-      <GraphControls
-        search={search}
-        onSearchChange={setSearch}
-        minConfidence={minConfidence}
-        onMinConfidenceChange={setMinConfidence}
-        selectedDomains={selectedDomains}
-        onDomainToggle={toggleDomain}
-      />
-      <OntologyGraph
-        nodes={filteredNodes}
-        edges={filteredEdges}
-        activeNodeId={selectedNode?.id}
-        onNodeClick={(node) => {
-          setSelectedNode(node);
-          setSelectedEdge(null);
-        }}
-        onEdgeClick={(edge) => {
-          setSelectedEdge(edge);
-        }}
-      />
-      <div className="space-y-6">
-        <NodeDetail node={selectedNode} />
-        <EdgeDetail edge={selectedEdge} />
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start min-h-[calc(100vh-140px)]">
+      {/* Central Content Area */}
+      <div className="lg:col-span-9 flex flex-col gap-6">
+        {/* Large Central White Card for Canvas */}
+        <div className="bg-white shadow-md rounded-lg border border-slate-200 flex flex-col overflow-hidden relative" style={{ height: '600px' }}>
+          <div className="bg-[#152A38] text-white px-4 py-3 flex justify-between items-center z-10">
+            <h2 className="font-semibold text-sm tracking-wide">Ontology Graph Explorer</h2>
+            <span className="bg-[#0056B3] text-xs px-2 py-1 rounded font-bold">Interactive</span>
+          </div>
+          <div className="flex-1 relative">
+            <OntologyGraph
+              nodes={filteredNodes}
+              edges={filteredEdges}
+              activeNodeId={selectedNode?.id}
+              onNodeClick={(node) => {
+                setSelectedNode(node);
+                setSelectedEdge(null);
+              }}
+              onEdgeClick={(edge) => {
+                setSelectedEdge(edge);
+              }}
+            />
+          </div>
+        </div>
+
+        {/* GeoNetwork Map Area */}
+        <GeoNetworkMap />
+      </div>
+
+      {/* Right Column Details & Controls */}
+      <div className="lg:col-span-3 space-y-4 h-full overflow-y-auto pr-2 pb-10">
+        <div className="bg-white shadow-sm rounded-lg border border-slate-200 p-4">
+          <GraphControls
+            search={search}
+            onSearchChange={setSearch}
+            minConfidence={minConfidence}
+            onMinConfidenceChange={setMinConfidence}
+            selectedDomains={selectedDomains}
+            onDomainToggle={toggleDomain}
+          />
+        </div>
+        <div className="bg-white shadow-sm rounded-lg border border-slate-200 p-4">
+          <NodeDetail node={selectedNode} />
+        </div>
+        <div className="bg-white shadow-sm rounded-lg border border-slate-200 p-4">
+          <EdgeDetail edge={selectedEdge} />
+        </div>
       </div>
     </div>
   );
