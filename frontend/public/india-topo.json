@@ -1,0 +1,16 @@
+{
+  "type": "Topology",
+  "objects": {
+    "india": {
+      "type": "GeometryCollection",
+      "geometries": [
+        { "type": "Point", "properties": { "name": "Maharashtra", "x": 42, "y": 64 } },
+        { "type": "Point", "properties": { "name": "Madhya Pradesh", "x": 48, "y": 48 } },
+        { "type": "Point", "properties": { "name": "Rajasthan", "x": 34, "y": 40 } },
+        { "type": "Point", "properties": { "name": "Uttar Pradesh", "x": 60, "y": 36 } },
+        { "type": "Point", "properties": { "name": "Bihar", "x": 72, "y": 44 } }
+      ]
+    }
+  },
+  "arcs": []
+}

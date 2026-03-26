@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: ./backend
+    container_name: argos-api
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - neo4j
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: argos-frontend
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+  redis:
+    image: redis:7-alpine
+    container_name: argos-redis
+    ports:
+      - "6379:6379"
+
+  neo4j:
+    image: neo4j:5-community
+    container_name: argos-neo4j
+    environment:
+      NEO4J_AUTH: neo4j/argos-password
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - neo4j_data:/data
+
+volumes:
+  neo4j_data:

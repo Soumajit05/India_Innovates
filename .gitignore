@@ -1,0 +1,16 @@
+.next/
+.pytest_cache/
+__pycache__/
+*.pyc
+*.pyo
+.env
+.env.local
+backend/.venv/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+backend/.mypy_cache/
+backend/.ruff_cache/
+coverage.xml
+dist/
+build/
