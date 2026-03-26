@@ -3,44 +3,23 @@
 @tailwind utilities;
 
 :root {
-  --font-display: "Bahnschrift", "Segoe UI Semibold", "Trebuchet MS", sans-serif;
-  --font-body: "Aptos", "Segoe UI", "Trebuchet MS", sans-serif;
+  --font-display: "Aptos", "Segoe UI", sans-serif;
+  --font-body: "Aptos", "Segoe UI", sans-serif;
   --font-mono: "Cascadia Mono", "Consolas", monospace;
-  --bg-0: #071018;
-  --bg-1: #0b1721;
-  --bg-2: #112534;
-  --line: rgba(129, 161, 184, 0.18);
-  --text: #edf4fb;
-  --muted: #8aa2b7;
-  --signal: #35d0aa;
-  --flare: #f7b84b;
-  --warn: #ff7a59;
+  
+  --bg-app: #f8fafc; /* bg-slate-50 */
+  --text-primary: #1e293b; /* slate-800 */
 }
 
 html {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   min-height: 100vh;
-  color: var(--text);
+  color: var(--text-primary);
   font-family: var(--font-body);
-  background:
-    radial-gradient(circle at top left, rgba(53, 208, 170, 0.16), transparent 28%),
-    radial-gradient(circle at top right, rgba(247, 184, 75, 0.12), transparent 22%),
-    linear-gradient(180deg, var(--bg-2) 0%, var(--bg-0) 50%, #04080d 100%);
-}
-
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image:
-    linear-gradient(rgba(104, 132, 152, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(104, 132, 152, 0.08) 1px, transparent 1px);
-  background-size: 32px 32px;
-  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.3), black 30%, rgba(0, 0, 0, 0.5));
-  pointer-events: none;
+  background-color: var(--bg-app);
 }
 
 a {
@@ -50,18 +29,18 @@ a {
 
 @layer components {
   .panel {
-    @apply rounded-[28px] border border-white/10 bg-slate-950/55 backdrop-blur-xl shadow-glow;
+    @apply rounded-md border border-slate-200 bg-white shadow-sm;
   }
 
   .panel-title {
-    @apply font-display text-xs uppercase tracking-[0.28em] text-slate-400;
+    @apply font-bold text-xs uppercase tracking-wider text-[#0056B3];
   }
 
   .eyebrow {
-    @apply font-mono text-[11px] uppercase tracking-[0.34em] text-slate-400;
+    @apply font-mono text-[11px] uppercase tracking-wide text-slate-500;
   }
 
   .data-pill {
-    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] text-slate-300;
+    @apply inline-flex items-center gap-2 rounded bg-[#0056B3] px-3 py-1 font-bold text-xs uppercase tracking-wide text-white shadow-sm;
   }
 }
