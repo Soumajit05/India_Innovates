@@ -9,7 +9,6 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // --- Legacy Colors (Restored to prevent UI breakage) ---
         ink: "#08111a",
         panel: "#0f1c27",
         line: "#1d3341",
@@ -17,22 +16,6 @@ const config: Config = {
         flare: "#f7b84b",
         warn: "#ff7a59",
         frost: "#dbe7f2",
-        // --- GIGW Refactor Colors ---
-        gigw: {
-          navy: "#152A38",
-          saffron: "#FF9933",
-          green: "#138808",
-          blue: "#003366",
-          cerulean: {
-            600: "#0056B3",
-            700: "#004494"
-          },
-          charcoal: "#212529",
-          slate: "#F4F6F9",
-          success: "#28A745",
-          warning: "#FFC107",
-          error: "#DC3545"
-        }
       },
       boxShadow: {
         glow: "0 0 0 1px rgba(61, 146, 214, 0.16), 0 24px 60px rgba(2, 8, 15, 0.45)",
