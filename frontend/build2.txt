@@ -1,0 +1,69 @@
+
+> argos-frontend@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.25
+
+   Creating an optimized production build ...
+<w> [webpack.cache.PackFileCacheStrategy] Skipped not serializable cache item 'Compilation/modules|E:\India_Innovates\frontend\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!E:\India_Innovates\frontend\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!E:\India_Innovates\frontend\app\globals.css': No serializer registered for PostCSSSyntaxError
+<w> while serializing webpack/lib/cache/PackFileCacheStrategy.PackContentItems -> webpack/lib/NormalModule -> webpack/lib/ModuleBuildError -> PostCSSSyntaxError
+Failed to compile.
+
+./app/globals.css:53:5
+Syntax error: E:\India_Innovates\frontend\app\globals.css The `shadow-glow` class does not exist. If `shadow-glow` is a custom class, make sure it is defined within a `@layer` directive.
+
+ [90m 51 | [39m[36m@layer[39m components [33m{[39m
+ [90m 52 | [39m  [33m.panel[39m [33m{[39m
+[1m[31m>[39m[22m[90m 53 | [39m    [36m@apply[39m rounded-[33m[[39m28px[33m][39m border border-white/10 bg-slate-950/55 backdrop-blur-xl shadow-glow[33m;[39m
+ [90m    | [39m    [1m[31m^[39m[22m
+ [90m 54 | [39m  [33m}[39m
+ [90m 55 | [39m
+
+./app/globals.css
+Syntax error: E:\India_Innovates\frontend\app\globals.css The `shadow-glow` class does not exist. If `shadow-glow` is a custom class, make sure it is defined within a `@layer` directive. (53:5)
+
+ [90m 51 | [39m[36m@layer[39m components [33m{[39m
+ [90m 52 | [39m  [33m.panel[39m [33m{[39m
+[1m[31m>[39m[22m[90m 53 | [39m    [36m@apply[39m rounded-[33m[[39m28px[33m][39m border border-white/10 bg-slate-950/55 backdrop-blur-xl shadow-glow[33m;[39m
+ [90m    | [39m    [1m[31m^[39m[22m
+ [90m 54 | [39m  [33m}[39m
+ [90m 55 | [39m
+
+    at tryRunOrWebpackError (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:312989)
+    at __webpack_require_module__ (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (E:\India_Innovates\frontend\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+    at done (E:\India_Innovates\frontend\node_modules\next\dist\compiled\neo-async\async.js:1:14824)
+    at Hook.eval [as callAsync] (eval at create (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:13:28858), <anonymous>:15:1)
+    at Hook.CALL_ASYNC_DELEGATE [as _callAsync] (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:13:26012)
+    at E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:130328
+    at symbolIterator (E:\India_Innovates\frontend\node_modules\next\dist\compiled\neo-async\async.js:1:14402)
+-- inner error --
+Syntax error: E:\India_Innovates\frontend\app\globals.css The `shadow-glow` class does not exist. If `shadow-glow` is a custom class, make sure it is defined within a `@layer` directive. (53:5)
+
+ [90m 51 | [39m[36m@layer[39m components [33m{[39m
+ [90m 52 | [39m  [33m.panel[39m [33m{[39m
+[1m[31m>[39m[22m[90m 53 | [39m    [36m@apply[39m rounded-[33m[[39m28px[33m][39m border border-white/10 bg-slate-950/55 backdrop-blur-xl shadow-glow[33m;[39m
+ [90m    | [39m    [1m[31m^[39m[22m
+ [90m 54 | [39m  [33m}[39m
+ [90m 55 | [39m
+
+    at Object.<anonymous> (E:\India_Innovates\frontend\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!E:\India_Innovates\frontend\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!E:\India_Innovates\frontend\app\globals.css:1:7)
+    at E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:922493
+    at Hook.eval [as call] (eval at create (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:13:28636), <anonymous>:7:1)
+    at Hook.CALL_DELEGATE [as _call] (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:13:25906)
+    at E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:131198
+    at tryRunOrWebpackError (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:312943)
+    at __webpack_require_module__ (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:131165)
+    at __nested_webpack_require_153728__ (E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:130607)
+    at E:\India_Innovates\frontend\node_modules\next\dist\compiled\webpack\bundle5.js:28:131454
+    at symbolIterator (E:\India_Innovates\frontend\node_modules\next\dist\compiled\neo-async\async.js:1:14444)
+
+Generated code for E:\India_Innovates\frontend\node_modules\next\dist\build\webpack\loaders\css-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[2]!E:\India_Innovates\frontend\node_modules\next\dist\build\webpack\loaders\postcss-loader\src\index.js??ruleSet[1].rules[14].oneOf[12].use[3]!E:\India_Innovates\frontend\app\globals.css
+
+Import trace for requested module:
+./app/globals.css
+
+
+> Build failed because of webpack errors

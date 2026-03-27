@@ -1,0 +1,22 @@
+
+> argos-frontend@0.1.0 build
+> next build
+
+  ▲ Next.js 14.2.25
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully
+   Linting and checking validity of types ...
+Failed to compile.
+
+./components/graph/GeoNetworkMap.tsx:189:28
+Type error: Object literal may only specify known properties, and 'cursor' does not exist in type '{ default?: CSSProperties | undefined; hover?: CSSProperties | undefined; pressed?: CSSProperties | undefined; }'.
+
+[0m [90m 187 |[39m                     }[0m
+[0m [90m 188 |[39m                   }}[0m
+[0m[31m[1m>[22m[39m[90m 189 |[39m                   style[33m=[39m{{ cursor[33m:[39m [32m"pointer"[39m }}[0m
+[0m [90m     |[39m                            [31m[1m^[22m[39m[0m
+[0m [90m 190 |[39m                 [33m>[39m[0m
+[0m [90m 191 |[39m                   [33m<[39m[33mcircle[39m[0m
+[0m [90m 192 |[39m                     r[33m=[39m{isActiveNode [33m?[39m [35m8[39m [33m:[39m [35m5[39m}[0m
+Next.js build worker exited with code: 1 and signal: null

@@ -186,7 +186,7 @@ export function GeoNetworkMap() {
                       });
                     }
                   }}
-                  style={{ cursor: "pointer" }}
+                  className="cursor-pointer"
                 >
                   <circle
                     r={isActiveNode ? 8 : 5}
